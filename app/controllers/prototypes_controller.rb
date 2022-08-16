@@ -4,11 +4,11 @@ class PrototypesController < ApplicationController
 
 
   def index
-    @users = User.all
+    @prototypes = Prototype.all
   end
 
   def new
-    @user = User.new
+    @prototype = Prototype.new
   end
 
   def create
@@ -16,8 +16,8 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    prototype = Prototype.find(params[:id])
-    prototype.destroy
+    user = User.find(params[:id])
+    user.destroy
   end
 
   def edit
@@ -32,12 +32,18 @@ class PrototypesController < ApplicationController
   end
 
   private
+
+  def user_new_password
+
+
+  end
+
   def  user_params
     params.require(:user).permit(:name, :image, :text).merge(user_id: current_user.id)
   end
 
   def set_prototype
-    @prototype = Prototype.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def move_to_index

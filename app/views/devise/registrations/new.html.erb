@@ -5,7 +5,12 @@
 
         <%# 「モデル名」にはUserモデルであれば@userを渡しましょう。%>
         <%# 「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
-        <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+        <%#if user_signed_in?%>
+        <%#こんにちは、{"#name"}さん
+        <%#= form_with model: @user, url: destroy_user_session_path, method: :delete%>
+        <%# else %>
+        <%= form_with model: @orototype, url: user_registration_path, local: true do |f| %>
+        <%# end %>
 
         <div class="field">
           <%= f.label :email, "メールアドレス" %><br />
