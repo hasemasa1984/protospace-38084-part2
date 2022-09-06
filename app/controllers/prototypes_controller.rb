@@ -1,8 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:edit, :show]
   before_action :authenticate_user!, except: [:index, :show, :edit, :update]
-  #before_action :contributor_confirmation, only: [:edit, :update, :destroy]
-
 
 
   def index
@@ -14,8 +12,6 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    #@prototype = Prototype.new(prototype_params)
-   
     if  
       Prototype.create(prototype_params)
       redirect_to root_path
@@ -27,17 +23,17 @@ class PrototypesController < ApplicationController
   def show
     @comment = Comment.new
     @prototype = Prototype.find(params[:id])
-    @comments = @prototype.comments#.includes(params[:id])
+    @comments = @prototype.comments
   end
 
   def edit
-    #@prototype =Prototype.find(params[:id])
+    
   end
 
   def update
     prototype = Prototype.find(params[:id])
     if prototype.update(prototype_params)
-      redirect_to prototype_path#(@prototype)
+      redirect_to prototype_path
     else
       render :edit
     end
@@ -60,8 +56,4 @@ class PrototypesController < ApplicationController
   def set_prototype
     @prototype = Prototype.find(params[:id])
   end
-
-  #def contributor_confirmation
-    #redirect_to root_path unless current_user == @prototype.user
-  #end
 end
