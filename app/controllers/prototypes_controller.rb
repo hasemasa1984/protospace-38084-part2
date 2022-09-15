@@ -2,6 +2,7 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:edit, :show]
   before_action :authenticate_user!, except: [:index, :show, :edit, :update]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+  before_action :move_to_index, except: [:index, :show]
 
 
   def index
@@ -27,9 +28,7 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+   
   end
 
   def update
@@ -62,8 +61,14 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.find(params[:id])
   end
 
+  def move_to_index
+    unless user_signed_in?
+      redirect_to new_user_session_path#action: :index
+    end
+  end
+
   def contributor_confirmation
     @prototype = Prototype.find(params[:id])
-    redirect_to root_path unless current_user == @prototype.user
+    redirect_to new_user_session_path unless current_user == @prototype.user
   end
 end
