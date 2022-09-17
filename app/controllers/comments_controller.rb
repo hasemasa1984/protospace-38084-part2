@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :update]
 
   def create
     @comment = Comment.new(comment_params)
