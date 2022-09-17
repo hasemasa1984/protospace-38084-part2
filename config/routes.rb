@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "prototypes#index"
-  #resources :prototypes
-  resources :prototypes, only: [:index, :new, :create, :edit, :update]
+  resources :prototypes, only: [:show, :create, :new, :edit, :update, :destroy] do 
+    resources :comments, only: :create
+  end
+  resources :users, only: :show 
 end
