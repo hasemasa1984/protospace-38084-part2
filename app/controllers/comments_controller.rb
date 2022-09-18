@@ -14,9 +14,9 @@ class CommentsController < ApplicationController
   
   private
 
-  def set_prototype
-    @prototype = Prototype.find(params[:id])
-  end
+  #def set_prototype
+    #@prototype = Prototype.find(params[:id])
+  #end
 
   def comment_params
     params.require(:comment).permit(:content).merge(user_id: current_user.id, prototype_id: params[:prototype_id])
